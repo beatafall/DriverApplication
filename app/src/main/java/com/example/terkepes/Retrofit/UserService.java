@@ -1,5 +1,6 @@
 package com.example.terkepes.Retrofit;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Field;
@@ -11,11 +12,12 @@ import retrofit2.http.POST;
 import com.example.terkepes.Class.Driver;
 import com.example.terkepes.Class.MessageType;
 import com.example.terkepes.Class.Messages;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
 public interface UserService {
-    String BASE_URL = "http://webtraffic.conveyor.cloud/api/";
+    String BASE_URL = "http://192.168.0.126:45455/api/";
 
     @GET("driver")
     Call<List<Driver>> getDrivers();
@@ -34,13 +36,17 @@ public interface UserService {
                                @Field("lon") String lon, @Field("lat") String lat);
 
 
-
-//    @Headers("Content-Type: application/json")
+//
+//    @FormUrlEncoded
 //    @POST("message/")
 //    Call<Messages> sendMessage(@Body Messages messages);
 
 //    @Headers("Content-Type: application/json")
 //    @POST("message")
 //    Call<Messages> sendMessage(@Body Messages messages);
+
+//    @POST("message")
+//    @FormUrlEncoded
+//    Call<ResponseBody> send(@Body String message);
 
 }

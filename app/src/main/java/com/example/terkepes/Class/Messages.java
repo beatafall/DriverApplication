@@ -102,16 +102,4 @@ public class Messages {
         this.lat = lat;
     }
 
-    @Override
-    public String toString() {
-        return "{" +
-                ", MessageTypeId='" + messageTypeId + '\'' +
-                ", DriverId=" + driverId +
-                ", Line=" + line +
-                ", Bus=" + bus +
-                ", MessageDate=" + date +
-                ", MessageLon=" + lon +
-                ", MessageLat=" + lat +
-                '}';
-    }
 }

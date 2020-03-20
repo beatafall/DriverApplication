@@ -63,8 +63,7 @@ public class DriverLogin extends AppCompatActivity {
                                     intent.putExtra("driver", d.getDriverName());
                                     intent.putExtra("id", d.getDriverId());
                                     startActivity(intent);
-                                }
-                                else {
+                                }else if(!d.getDriverName().equals(username) && !d.getDriverPassword().equals(userpassword)){
                                     Toast.makeText(getApplicationContext(), "Helytelen név vagy jelszó!", Toast.LENGTH_SHORT).show();
                                 }
                             }

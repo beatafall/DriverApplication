@@ -24,15 +24,7 @@
         android:text="Tartózkodási hely megosztása"
         android:textColor="#212A6B" />
 
-    <TextView
-        android:id="@+id/tx"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:text="lat: "
-        android:textColor="#2E3B88"
-        android:textSize="18dp" />
+
 
     <TextView
         android:id="@+id/lat2"
@@ -41,16 +33,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="10dp"
         android:text="lat"
-        android:textColor="#2E3B88"
-        android:textSize="18dp" />
-
-    <TextView
-        android:id="@+id/tx2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="35dp"
-        android:text="lon: "
+        android:visibility="invisible"
         android:textColor="#2E3B88"
         android:textSize="18dp" />
 
@@ -61,6 +44,7 @@
         android:layout_marginLeft="50dp"
         android:layout_marginTop="35dp"
         android:text="lon"
+        android:visibility="invisible"
         android:textColor="#2E3B88"
         android:textSize="18dp" />
 
@@ -68,10 +52,10 @@
         android:id="@+id/driver"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginLeft="70dp"
+        android:layout_marginTop="540dp"
         android:text="driver"
-        android:textColor="#2E3B88"
+        android:textColor="#94261E"
         android:textSize="18dp" />
 
 </RelativeLayout>
