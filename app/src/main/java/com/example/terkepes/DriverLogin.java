@@ -34,15 +34,16 @@ public class DriverLogin extends AppCompatActivity {
         pass=findViewById(R.id.pass);
         btn_login=findViewById(R.id.btn_login);
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(UserService.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        final UserService userService = retrofit.create(UserService.class);
+
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl(UserService.BASE_URL)
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-                UserService userService = retrofit.create(UserService.class);
                 Call<List<Driver>> call = userService.getDrivers();
                 call.enqueue(new Callback<List<Driver>>() {
                     @Override
@@ -63,9 +64,11 @@ public class DriverLogin extends AppCompatActivity {
                                     intent.putExtra("driver", d.getDriverName());
                                     intent.putExtra("id", d.getDriverId());
                                     startActivity(intent);
-                                }else if(!d.getDriverName().equals(username) && !d.getDriverPassword().equals(userpassword)){
-                                    Toast.makeText(getApplicationContext(), "Helytelen név vagy jelszó!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(getApplicationContext(), "Sikeres bejelentkezes!", Toast.LENGTH_SHORT).show();
                                 }
+                               /* else {
+                                    Toast.makeText(getApplicationContext(), "Helytelen név vagy jelszó!", Toast.LENGTH_SHORT).show();
+                                }*/
                             }
                         }
                     }
@@ -91,7 +94,5 @@ public class DriverLogin extends AppCompatActivity {
         }
         return true;
     }
-
-
 
 }

@@ -3,12 +3,15 @@ package com.example.terkepes.Retrofit;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
+import com.example.terkepes.Class.BusLineDriver;
 import com.example.terkepes.Class.Driver;
 import com.example.terkepes.Class.MessageType;
 import com.example.terkepes.Class.Messages;
@@ -35,18 +38,9 @@ public interface UserService {
                                @Field("buszId") String bus, @Field("datum") String date,
                                @Field("lon") String lon, @Field("lat") String lat);
 
+    @GET("BusLineDriverApi")
+    Call<List<BusLineDriver>> getAllBusLineDriver();
 
-//
-//    @FormUrlEncoded
-//    @POST("message/")
-//    Call<Messages> sendMessage(@Body Messages messages);
-
-//    @Headers("Content-Type: application/json")
-//    @POST("message")
-//    Call<Messages> sendMessage(@Body Messages messages);
-
-//    @POST("message")
-//    @FormUrlEncoded
-//    Call<ResponseBody> send(@Body String message);
-
+    @DELETE("BusLineDriverApi/{vonalbuszsoforId}/")
+    Call<BusLineDriver> deleteBLD(@Path("vonalbuszsoforId") int id);
 }

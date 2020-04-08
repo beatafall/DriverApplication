@@ -1,12 +1,16 @@
 package com.example.terkepes;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Message extends AppCompatActivity {
 
@@ -32,7 +36,6 @@ public class Message extends AppCompatActivity {
         if(extras != null) {
             username = extras.getString("driverName");
             userId = extras.getString("driverId");
-
 
             lat.setText(getIntent().getStringExtra("latitude"));
             lon.setText(getIntent().getStringExtra("longitude"));
@@ -101,6 +104,28 @@ public class Message extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
+
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+            bottomNavigationView.setSelectedItemId(R.id.sendMessage);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case  R.id.newMessage:
+                            Intent intent = new Intent(Message.this, ViewMessagesFromAdmin.class);
+                            intent.putExtra("driverId", userId);
+                            intent.putExtra("latitude", lat.getText().toString());
+                            intent.putExtra("longitude", lon.getText().toString());
+                            intent.putExtra("driverName", username);
+                            startActivity(intent);
+                            break;
+                        case R.id.sendMessage:
+                            break;
+                    }
+                    return true;
+                }
+            });
+
 
         }
     }

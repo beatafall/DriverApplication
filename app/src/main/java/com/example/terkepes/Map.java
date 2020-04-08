@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -24,13 +25,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Map extends FragmentActivity implements OnMapReadyCallback {
 
     Location currentLocation;
     FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
-    Button btn_saveLoc;
     TextView lat, lon, driver;
 
     @Override
@@ -41,7 +42,6 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLastLocation();
 
-        btn_saveLoc=findViewById(R.id.savelocation);
         lat=findViewById(R.id.lat2);
         lon=findViewById(R.id.lon2);
         driver=findViewById(R.id.driver);
@@ -49,24 +49,37 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
         Bundle extras = getIntent().getExtras();
         final String username, userId;
 
-        if(extras != null){
+        if(extras != null) {
             username = extras.getString("driver");
             userId = extras.getString("id");
             driver.setText("Üdvözöljük, " + username + "!");
-            btn_saveLoc.setOnClickListener(new View.OnClickListener() {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getApplicationContext(), Message.class);
-                    intent.putExtra("latitude",lat.getText().toString());
-                    intent.putExtra("longitude", lon.getText().toString());
-                    intent.putExtra("driverId", userId);
-                    intent.putExtra("driverName", username);
-                    startActivity(intent);
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    switch (item.getItemId()) {
+                        case R.id.newMessage:
+                            Intent intent = new Intent(Map.this, ViewMessagesFromAdmin.class);
+                            intent.putExtra("latitude", lat.getText().toString());
+                            intent.putExtra("longitude", lon.getText().toString());
+                            intent.putExtra("driverId", userId);
+                            intent.putExtra("driverName", username);
+                            startActivity(intent);
+                            break;
+                        case R.id.sendMessage:
+                            Intent intent2 = new Intent(Map.this, Message.class);
+                            intent2.putExtra("latitude", lat.getText().toString());
+                            intent2.putExtra("longitude", lon.getText().toString());
+                            intent2.putExtra("driverId", userId);
+                            intent2.putExtra("driverName", username);
+                            startActivity(intent2);
+                            break;
+                    }
+                    return true;
                 }
             });
+
         }
-
-
     }
 
     private void fetchLastLocation() {
