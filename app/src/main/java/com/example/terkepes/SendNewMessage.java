@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Message extends AppCompatActivity {
+public class SendNewMessage extends AppCompatActivity {
 
     TextView lat, lon;
     Button btn_lerobbanas, btn_lopas, btn_baleset, btn_forgalom, btn_tulzsofoltsag;
@@ -112,7 +112,7 @@ public class Message extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case  R.id.newMessage:
-                            Intent intent = new Intent(Message.this, ViewMessagesFromAdmin.class);
+                            Intent intent = new Intent(SendNewMessage.this, ViewMessagesFromAdmin.class);
                             intent.putExtra("driverId", userId);
                             intent.putExtra("latitude", lat.getText().toString());
                             intent.putExtra("longitude", lon.getText().toString());

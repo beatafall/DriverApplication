@@ -1,41 +1,38 @@
 package com.example.terkepes;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.terkepes.Class.BusLineDriver;
-import com.example.terkepes.Class.Driver;
 import com.example.terkepes.Retrofit.ApiUtils;
 import com.example.terkepes.Retrofit.UserService;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+
+import static java.lang.String.format;
 
 public class ViewMessagesFromAdmin extends AppCompatActivity {
 
@@ -63,6 +60,7 @@ public class ViewMessagesFromAdmin extends AppCompatActivity {
             userId = extras.getString("driverId");
 
             service.getAllBusLineDriver().enqueue(new Callback<List<BusLineDriver>>() {
+                @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void onResponse(Call<List<BusLineDriver>> call, Response<List<BusLineDriver>> response) {
 
@@ -71,15 +69,17 @@ public class ViewMessagesFromAdmin extends AppCompatActivity {
                         return;
                     }
                     final List<BusLineDriver> drivers = response.body();
+                    int k=1;
                     for(final BusLineDriver d : drivers) {
-                        if (d.getSoforId().toString().equals(userId)) {
-                            String content = "";
-                            content += "Busz: " + d.getBuszId() + "\n";
-                            content += "Vonal: " + d.getVonalId() + "\n";
-                            content += "Idopont: " + d.getDatum() + "\n\n";
+                        if (d.getSoforId().equals(userId)) {
+                            String content = k + ".)  "+ "Indulás ideje ";
+                            content += d.getDatum() + ", a ";
+                            content += d.getVonalId() + " vonal, ";
+                            content += d.getBuszId() + " számú busszal." + "\n\n";
+                            k++;
 
                             messageItems.append(content);
-                        }
+                       }
 
                     }
 
@@ -121,7 +121,7 @@ public class ViewMessagesFromAdmin extends AppCompatActivity {
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     switch (item.getItemId()) {
                         case R.id.sendMessage:
-                            Intent intent = new Intent(ViewMessagesFromAdmin.this, Message.class);
+                            Intent intent = new Intent(ViewMessagesFromAdmin.this, SendNewMessage.class);
                             intent.putExtra("latitude", getIntent().getStringExtra("latitude"));
                             intent.putExtra("longitude", getIntent().getStringExtra("longitude"));
                             intent.putExtra("driverId", userId);

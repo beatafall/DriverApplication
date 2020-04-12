@@ -21,7 +21,7 @@
         <activity android:name=".ViewMessagesFromAdmin"></activity>
         <activity android:name=".Map" />
         <activity android:name=".Form" />
-        <activity android:name=".Message" />
+        <activity android:name=".SendNewMessage" />
 
         <uses-library
             android:name="org.apache.http.legacy"

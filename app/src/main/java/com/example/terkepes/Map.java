@@ -11,9 +11,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -54,6 +52,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
             userId = extras.getString("id");
             driver.setText("Üdvözöljük, " + username + "!");
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottomnav);
+            bottomNavigationView.getMenu().setGroupCheckable(0, false, true);
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -67,7 +66,7 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
                             startActivity(intent);
                             break;
                         case R.id.sendMessage:
-                            Intent intent2 = new Intent(Map.this, Message.class);
+                            Intent intent2 = new Intent(Map.this, SendNewMessage.class);
                             intent2.putExtra("latitude", lat.getText().toString());
                             intent2.putExtra("longitude", lon.getText().toString());
                             intent2.putExtra("driverId", userId);
