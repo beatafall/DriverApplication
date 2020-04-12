@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.terkepes.Class.Driver;
+import com.example.terkepes.Retrofit.ApiUtils;
 import com.example.terkepes.Retrofit.UserService;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class DriverLogin extends AppCompatActivity {
 
     EditText name, pass;
     Button btn_login;
+    UserService userService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +36,7 @@ public class DriverLogin extends AppCompatActivity {
         pass=findViewById(R.id.pass);
         btn_login=findViewById(R.id.btn_login);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(UserService.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        final UserService userService = retrofit.create(UserService.class);
+        userService = ApiUtils.getAPIService();
 
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
