@@ -11,4 +11,8 @@
         android:icon="@drawable/ic_email_black_24dp"
         android:title="Bejövő üzenetek"/>
 
+    <item
+        android:id="@+id/searchLine"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="Busz követése" />
 </menu>

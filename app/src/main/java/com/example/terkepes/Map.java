@@ -65,13 +65,21 @@ public class Map extends FragmentActivity implements OnMapReadyCallback {
                             intent.putExtra("driverName", username);
                             startActivity(intent);
                             break;
-                        case R.id.sendMessage:
-                            Intent intent2 = new Intent(Map.this, SendNewMessage.class);
+                        case R.id.searchLine:
+                            Intent intent2 = new Intent(Map.this, SeachLine.class);
                             intent2.putExtra("latitude", lat.getText().toString());
                             intent2.putExtra("longitude", lon.getText().toString());
                             intent2.putExtra("driverId", userId);
                             intent2.putExtra("driverName", username);
                             startActivity(intent2);
+                            break;
+                        case R.id.sendMessage:
+                            Intent intent3 = new Intent(Map.this, SendNewMessage.class);
+                            intent3.putExtra("latitude", lat.getText().toString());
+                            intent3.putExtra("longitude", lon.getText().toString());
+                            intent3.putExtra("driverId", userId);
+                            intent3.putExtra("driverName", username);
+                            startActivity(intent3);
                             break;
                     }
                     return true;

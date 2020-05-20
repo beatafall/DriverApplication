@@ -130,6 +130,14 @@ public class ViewMessagesFromAdmin extends AppCompatActivity {
                             break;
                         case R.id.newMessage:
                             break;
+                        case R.id.searchLine:
+                            Intent intent2 = new Intent(ViewMessagesFromAdmin.this, SeachLine.class);
+                            intent2.putExtra("latitude", getIntent().getStringExtra("latitude"));
+                            intent2.putExtra("longitude", getIntent().getStringExtra("longitude"));
+                            intent2.putExtra("driverId", userId);
+                            intent2.putExtra("driverName", username);
+                            startActivity(intent2);
+                            break;
                     }
                     return true;
                 }

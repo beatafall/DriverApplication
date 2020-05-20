@@ -12,7 +12,10 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 import com.example.terkepes.Class.BusLineDriver;
+import com.example.terkepes.Class.BusesOnTheRoad;
 import com.example.terkepes.Class.Driver;
+import com.example.terkepes.Class.Line;
+import com.example.terkepes.Class.LineStations;
 import com.example.terkepes.Class.MessageType;
 import com.example.terkepes.Class.Messages;
 import com.google.gson.JsonObject;
@@ -30,6 +33,15 @@ public interface UserService {
 
     @GET("messageType")
     Call<List<MessageType>> getMessageType();
+
+    @GET("line")
+    Call<List<Line>> getLines();
+
+    @GET("LineStation")
+    Call<List<LineStations>> getLineStations();
+
+    @GET("busesontheroad")
+    Call<List<BusesOnTheRoad>> getBuses();
 
     @POST("message/")
     @FormUrlEncoded

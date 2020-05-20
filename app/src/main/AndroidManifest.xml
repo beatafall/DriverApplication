@@ -8,6 +8,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -18,7 +19,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ViewMessagesFromAdmin"></activity>
+        <activity android:name=".ViewLine"></activity>
+        <activity android:name=".SeachLine" />
+        <activity android:name=".ViewMessagesFromAdmin" />
         <activity android:name=".Map" />
         <activity android:name=".Form" />
         <activity android:name=".SendNewMessage" />

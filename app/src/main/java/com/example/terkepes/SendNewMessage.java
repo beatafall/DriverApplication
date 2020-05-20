@@ -119,6 +119,14 @@ public class SendNewMessage extends AppCompatActivity {
                             intent.putExtra("driverName", username);
                             startActivity(intent);
                             break;
+                        case R.id.searchLine:
+                            Intent intent2 = new Intent(SendNewMessage.this, SeachLine.class);
+                            intent2.putExtra("latitude", lat.getText().toString());
+                            intent2.putExtra("longitude", lon.getText().toString());
+                            intent2.putExtra("driverId", userId);
+                            intent2.putExtra("driverName", username);
+                            startActivity(intent2);
+                            break;
                         case R.id.sendMessage:
                             break;
                     }
